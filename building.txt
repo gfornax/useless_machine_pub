@@ -1,0 +1,28 @@
+1. Solder all parts except the power converters according to layout.
+   I assume you do not need explanation for doing that.
+2. The buckboost module should be set to an initial value of 10V,
+   while the buck (servo supply voltage) can be set to max. 4V.
+   Afterwards, solder these modules like shown in the pictures. 
+   The buckboost module needs to be attached tilt in the current
+   revision of the layout. Be careful the supply wires do not 
+   touch the fuse.
+3. Connect a current limited supply voltage of about 10V to PBAT (+)
+   and one of the ground points. The 3mm LED should light up and
+   the current should be no more than 40mA 
+4. You should now already be able to set the fuse bits, flash the
+   controller and see output at 38400 8N1 on the serial connector.
+5. Depending on the printer electronics supply voltage, set the
+   VCC select to either 3.3V or 5V.
+6. Connect the switches. They should be wired so they are seperated
+   from GND when the user pushes them. The order can be fixed
+   in the software. On the connector, pins X and X are GND. 
+7. Connect the LEDs to a XXX. The LEDs are connected
+   common ground (resistors are on the board), GND is on pins
+   X and X.
+7. Connect the slider:
+ encoder supply voltage (3.3V or 5V)
+ PH_A, PH_B encoder signal lines
+ GND common ground
+ servo supply voltage (from buck converter)
+ servo signal (usually the orange/yellow one)
+ slider LED anode (optional)

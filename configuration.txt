@@ -1,0 +1,36 @@
+1. Connect the everything but servo and motor, check that
+   serial output works. Note that in the current revision, switches
+   1&2 have to be activated or disconnected to flash the controller.
+   This will be fixed in the next rev.
+2. Check if the binary key indicator in the serial terminal outputs
+   the correct values. If the order is messed up, fix it by either
+   resoldering the connections or adjusting the definitions after
+   line 320. After that, if you are using LEDs, you can adjust 
+   their order at the variable on line 217.
+3. Choose a zero position on one of the sides.
+4. Turn off power, connect motor, Turn on power.
+5. Adjust the move_right() and move_left() functions so when 
+   initializing, the slider moves to this side.
+6. If necessary, swap PHASE_A and PHASE_B defines so the position
+   is positive when moving away from zero position
+7. Disconnect the slider motor after a successfull init cycle w/o 
+   disconnecting power
+8. Move up the servo manually so you can position it exactly where
+   the switches are
+9. manually move the slider to the switches, set the #define POSn
+   to the position values from the serial terminal
+   Also set the POSLIMIT defines to the positions where the lid
+   ends.
+10. Adjust the output voltage of the buckboost to get a reasonable
+    movement speed of the slider.
+11. Adjust the PID defines, so the slider moves fast, precise, but
+    without oscillation (check general guides for adjusting PID
+    controllers if necessary)
+12. With servo output voltage around 4V, adjust the SERVO_ defines.
+    While IDLE, the servo should stay completely within the machine.
+    While HOLD, the lid should be kept open.
+    WHILE TOG, the switch should be toggled.
+13. If the servo does not always toggle but keeps its HOLD position, 
+    it usually means that either PID_KP is too low or POSTOL is too
+    small. POSTOL must be kept rather small to avoid missing the
+    switch.
