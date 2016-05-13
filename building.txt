@@ -13,16 +13,17 @@
    controller and see output at 38400 8N1 on the serial connector.
 5. Depending on the printer electronics supply voltage, set the
    VCC select to either 3.3V or 5V.
-6. Connect the switches. They should be wired so they are seperated
-   from GND when the user pushes them. The order can be fixed
-   in the software. On the connector, pins X and X are GND. 
-7. Connect the LEDs to a XXX. The LEDs are connected
+6. Connect the switches to SWITCH. They should be wired so they 
+   are seperated from GND when the user pushes them. The order
+   can be fixed in the software. On the connector,
+   pins 1 and 2 are GND. 
+7. Optional: Connect the LEDs to a SV8. The LEDs are connected
    common ground (resistors are on the board), GND is on pins
-   X and X.
+   1 and 2.
 7. Connect the slider:
- encoder supply voltage (3.3V or 5V)
- PH_A, PH_B encoder signal lines
- GND common ground
- servo supply voltage (from buck converter)
- servo signal (usually the orange/yellow one)
- slider LED anode (optional)
+ 1 servo supply voltage (from buck converter)
+ 2 encoder supply voltage (3.3V or 5V)
+ 3 GND common ground
+ 4 servo signal (usually the orange/yellow one)
+ 5 slider LED anode (optional)
+ 6, 7 PH_A, PH_B encoder signal lines
