@@ -4,15 +4,18 @@
    This will be fixed in the next rev.
 2. Check if the binary key indicator in the serial terminal outputs
    the correct values. If the order is messed up, fix it by either
-   resoldering the connections or adjusting the definitions after
-   line 320. After that, if you are using LEDs, you can adjust 
-   their order at the variable on line 217.
+   resoldering the connections or adjusting the definitions in the
+   config section. Note that 2 of the switches are placed on PORTB
+   when adapting this configuration. After that, if you are using
+   LEDs, you can adjust their order at the variable on line 253.
 3. Choose a zero position on one of the sides.
 4. Turn off power, connect motor, Turn on power.
-5. Adjust the move_right() and move_left() functions so when 
-   initializing, the slider moves to this side.
-6. If necessary, swap PHASE_A and PHASE_B defines so the position
-   is positive when moving away from zero position
+5. Choose the slider direction so it will move to your prefered
+   side while initializing by uncommenting SLIDER_REVERSE if
+   necessary. 
+6. If necessary, swap the encoder direction by uncommenting 
+   ENCODER_REVERSE, so the position index is positive when moving
+   away from zero position
 7. Disconnect the slider motor after a successfull init cycle w/o 
    disconnecting power
 8. Move up the servo manually so you can position it exactly where
