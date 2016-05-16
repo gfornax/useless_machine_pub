@@ -13,7 +13,6 @@
 
 #define OCLEFT OCR1A
 #define OCRIGHT OCR1B
-#define OCSERVO OCR2
 
 /* encoder inputs, reverse PD3/PD4 if necessary */
 #define PHASE_A	(PIND & 1<<PD4)
