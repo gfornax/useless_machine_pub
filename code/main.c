@@ -8,16 +8,16 @@
 
 #include "usart.h"
 
+
+/* BEGIN CONFIG SECTION */
+
 /* uncomment to use FIFO mode for turning off switches in same order */
 //#define USE_FIFO
 
-#define OCLEFT OCR1A
-#define OCRIGHT OCR1B
-
-/* encoder inputs, reverse PD3/PD4 if necessary */
-#define PHASE_A	(PIND & 1<<PD4)
-#define PHASE_B (PIND & 1<<PD3)
-
+/* uncomment to switch slider direction */
+//#define SLIDER_REVERSE
+/* uncomment to change encoder counting direction */
+//#define ENCODER_REVERSE
 
 /* 
  * controller parameters section
@@ -56,9 +56,46 @@
 /* tolerance +/- of position for activating servo */
 #define POSTOL	24 
 
+/* switch layout */
+
+#define SW0PORT	PINC
+#define SW0PIN	PC4
+#define SW0PORT	PINC
+#define SW0PIN	PC5
+#define SW0PORT	PINC
+#define SW0PIN	PC2
+#define SW0PORT	PINC
+#define SW0PIN	PC3
+#define SW0PORT	PINC
+#define SW0PIN	PC0
+#define SW0PORT	PINC
+#define SW0PIN	PC1
+#define SW0PORT	PINB
+#define SW0PIN	PB4
+#define SW0PORT	PINB
+#define SW0PIN	PB5
+
 /* delay times for switches, see main */
 #define WAIT0	6
 #define WAIT1	10
+
+/* END CONFIG SECTION */
+
+#ifdef SLIDER_REVERSE
+        #define OCLEFT OCR1A
+        #define OCRIGHT OCR1B
+#else
+        #define OCLEFT OCR1B
+        #define OCRIGHT OCR1A
+#endif
+
+#ifdef ENCODER_REVERSE
+        #define PHASE_A (PIND & 1<<PD4)
+        #define PHASE_B (PIND & 1<<PD3)
+#else
+        #define PHASE_A (PIND & 1<<PD3)
+        #define PHASE_B (PIND & 1<<PD4)
+#endif
 
 
 int usart_putchar_printf(char var, FILE *stream);
@@ -316,22 +353,21 @@ int main(void)
 
 	while ( 1 ){
 		keyvar = 0;
-		/* this section can be used to configure the switch order */
-		if(PINC & (1 << PC0))
-			keyvar += 0x10;
-		if(PINC & (1 << PC1))
-			keyvar += 0x20;
-		if(PINC & (1 << PC2))
-			keyvar += 0x04;
-		if(PINC & (1 << PC3))
-			keyvar += 0x08;
-		if(PINC & (1 << PC4))
+		if(SW0PORT & (1 << SW0PIN))
 			keyvar += 0x01;
-		if(PINC & (1 << PC5))
+		if(SW1PORT & (1 << SW1PIN))
 			keyvar += 0x02;
-		if(PINB & (1 << PB4))
+		if(SW2PORT & (1 << SW2PIN))
+			keyvar += 0x04;
+		if(SW3PORT & (1 << SW3PIN))
+			keyvar += 0x08;
+		if(SW4PORT & (1 << SW4PIN))
+			keyvar += 0x10;
+		if(SW5PORT & (1 << SW5PIN))
+			keyvar += 0x20;
+		if(SW6PORT & (1 << SW6PIN))
 			keyvar += 0x40;
-		if(PINB & (1 << PB5))
+		if(SW7PORT & (1 << SW7PIN))
 			keyvar += 0x80;
 #if 1 
 		printf("\rpos: %5d key: ", position);
